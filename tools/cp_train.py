@@ -26,8 +26,8 @@ import _init_paths
 from config import cfg
 from config import update_config
 from core.loss import JointsMSELoss
-from core.function import trpnet_train as train
-from core.function import trpnet_validate as validate
+from core.function import rsgnet_train as train
+from core.function import rsgnet_validate as validate
 from utils.utils import get_optimizer
 from utils.utils import save_checkpoint
 from utils.utils import create_logger
@@ -223,9 +223,6 @@ def main():
             'optimizer': optimizer.state_dict(),
         }, best_model, final_output_dir)
 
-        if round(perf_indicator, 3) == 0.724:
-            print('end_epoch', epoch + 1)
-            break
 
     logger.info('=> evaluate model on test set')
     validate(
