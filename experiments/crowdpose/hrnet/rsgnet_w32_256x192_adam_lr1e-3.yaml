@@ -39,7 +39,7 @@ MODEL:
   - 128
   SIGMA: 2
   UP_SCALE: 2
-  RELATION_SUB_SAMPLE: true
+  RELATION_SUB_SAMPLE: false
   MASK_ON: false
   POSE_ON: true
   SEM_ON: false
