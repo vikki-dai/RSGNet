@@ -31,14 +31,11 @@ from utils.utils import create_logger
 import dataset
 import models
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,3"
 def parse_args():
     parser = argparse.ArgumentParser(description='Train keypoints network')
     # general
     parser.add_argument('--cfg',
                         help='experiment configure file name',
-                        default="/home/daiyan/code/deep-high-resolution-net/experiments/coco/hrnet/w32_256x192_adam_lr1e-3_upsampling_4.yaml",
-                        # default="/home/daiyan/code/deep-high-resolution-net/experiments/coco/hrnet/w32_256x192_adam_lr1e-3.yaml",
                         required=False,
                         type=str)
 

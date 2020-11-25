@@ -36,15 +36,13 @@ from utils.utils import get_model_summary
 import dataset
 import models
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "4,5,6,7"
 def parse_args():
     parser = argparse.ArgumentParser(description='Train keypoints network')
     # general
     parser.add_argument('--cfg',
                         help='experiment configure file name',
                         required=False,
-                        default="/home/daiyan/code/deep-high-resolution-net/experiments/coco/hrnet/w32_256x192_adam_lr1e-3_upsampling_4.yaml",
-                        # default="/home/daiyan/code/deep-high-resolution-net/experiments/coco/hrnet/w32_256x192_adam_lr1e-3.yaml",
+                        default=None,
                         type=str)
 
     parser.add_argument('opts',

@@ -26,8 +26,8 @@ import _init_paths
 from config import cfg
 from config import update_config
 from core.loss import JointsMSELoss
-from core.function import trpnet_train as train
-from core.function import trpnet_validate as validate
+from core.function import rsgnet_train as train
+from core.function import rsgnet_validate as validate
 from utils.utils import get_optimizer
 from utils.utils import save_checkpoint
 from utils.utils import create_logger
@@ -35,14 +35,14 @@ from utils.utils import get_model_summary
 
 import dataset
 import models
-os.environ["CUDA_VISIBLE_DEVICES"] = "4,5,6,7"
+
 def parse_args():
     parser = argparse.ArgumentParser(description='Train keypoints network')
     # general
     parser.add_argument('--cfg',
                         help='experiment configure file name',
                         required=False,
-                        default="experiments/crowdpose/hrnet/rsgnet_w32_256x192_adam_lr1e-3.yaml",
+                        default="experiments/coco/hrnet/rsgnet_w32_256x192_adam_lr1e-3.yaml",
                         type=str)
 
     parser.add_argument('opts',
@@ -124,21 +124,21 @@ def main():
         mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]
     )
     train_dataset = eval('dataset.'+cfg.DATASET.DATASET)(
-        cfg, cfg.DATASET.ROOT, cfg.DATASET.TRAIN_SET, True, 'TRAIN',
+        cfg, cfg.DATASET.ROOT, cfg.DATASET.TRAIN_SET, True,
         transforms.Compose([
             transforms.ToTensor(),
             normalize,
         ])
     )
     valid_dataset = eval('dataset.'+cfg.DATASET.DATASET)(
-        cfg, cfg.DATASET.ROOT, cfg.DATASET.VAL_SET, False, 'VAL',
+        cfg, cfg.DATASET.ROOT, cfg.DATASET.TEST_SET, False,
         transforms.Compose([
             transforms.ToTensor(),
             normalize,
         ])
     )
     test_dataset = eval('dataset.' + cfg.DATASET.DATASET)(
-        cfg, cfg.DATASET.ROOT, cfg.DATASET.TEST_SET, False, 'TEST',
+        cfg, cfg.DATASET.ROOT, 'test', False,
         transforms.Compose([
             transforms.ToTensor(),
             normalize,
@@ -182,7 +182,7 @@ def main():
         begin_epoch = checkpoint['epoch']
         best_perf = checkpoint['perf']
         last_epoch = checkpoint['epoch']
-        model.load_state_dict(checkpoint['state_dict'], strict=False)
+        model.load_state_dict(checkpoint['state_dict'])
 
         optimizer.load_state_dict(checkpoint['optimizer'])
         logger.info("=> loaded checkpoint '{}' (epoch {})".format(
@@ -206,7 +206,7 @@ def main():
             cfg, valid_loader, valid_dataset, model, criterion,
             final_output_dir, tb_log_dir, writer_dict
         )
-        #
+
         if perf_indicator >= best_perf:
             best_perf = perf_indicator
             best_model = True
@@ -222,11 +222,6 @@ def main():
             'perf': perf_indicator,
             'optimizer': optimizer.state_dict(),
         }, best_model, final_output_dir)
-
-        if round(perf_indicator, 3) == 0.724:
-            print('end_epoch', epoch + 1)
-            break
-
     logger.info('=> evaluate model on test set')
     validate(
         cfg, test_loader, test_dataset, model, criterion,

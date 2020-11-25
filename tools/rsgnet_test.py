@@ -25,20 +25,22 @@ import _init_paths
 from config import cfg
 from config import update_config
 from core.loss import JointsMSELoss
-from core.function import trpnet_validate as validate
-# from core.function import rsgnet_validate as validate
+from core.function import rsgnet_validate as validate
 from utils.utils import create_logger
+from core.function import rsgnet_train
+from core.function import rsgnet_validate
 
 import dataset
 import models
 
+# os.environ["CUDA_VISIBLE_DEVICES"] = "4,5,6,7"
 def parse_args():
     parser = argparse.ArgumentParser(description='Train keypoints network')
     # general
     parser.add_argument('--cfg',
                         help='experiment configure file name',
-                        required=True,
-                        default="experiments/crowdpose/hrnet/rsgnet_w32_256x192_adam_lr1e-3.yaml",
+                        efault="experiments/coco/hrnet/rsgnet_w32_256x192_adam_lr1e-3.yaml",
+                        required=False,
                         type=str)
 
     parser.add_argument('opts',
@@ -49,8 +51,7 @@ def parse_args():
     parser.add_argument('--modelDir',
                         help='model directory',
                         type=str,
-                        default=''
-                        )
+                        default='')
     parser.add_argument('--logDir',
                         help='log directory',
                         type=str,
@@ -73,7 +74,7 @@ def main():
     update_config(cfg, args)
 
     logger, final_output_dir, tb_log_dir = create_logger(
-        cfg, args.cfg, 'valid')
+        cfg, args.cfg, 'validate')
 
     logger.info(pprint.pformat(args))
     logger.info(cfg)
@@ -109,7 +110,7 @@ def main():
         mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]
     )
     valid_dataset = eval('dataset.'+cfg.DATASET.DATASET)(
-        cfg, cfg.DATASET.ROOT, cfg.DATASET.TEST_SET, False, 'VAL',
+        cfg, cfg.DATASET.ROOT, cfg.DATASET.TEST_SET, False,
         transforms.Compose([
             transforms.ToTensor(),
             normalize,
