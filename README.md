@@ -61,7 +61,7 @@ The code is developed based on the [HRNet project](https://github.com/leoxiaobin
 
 * For **CrowdPose data**, please download from [CrowdPose download](https://github.com/Jeff-sjtu/CrowdPose#dataset), Train/Val is needed for CrowdPose keypoints training and validation. Please download and extract them under {POSE_ROOT}/data.
 # Training and Testing
-* Testing on CrowdPose dataset using [model zoo's models]()
+* Testing on CrowdPose dataset using [model zoo's models](https://github.com/vikki-dai/RSGNet/blob/main/model_zoo.txt)
 ```python
   CUDA_VISIBLE_DEVICES=0,1,2,3 python tools/cp_train.py \
   --cfg experiments/crowdpose/hrnet/rsgnet_w32_256x192_adam_lr1e-3.yaml \
@@ -72,7 +72,7 @@ The code is developed based on the [HRNet project](https://github.com/leoxiaobin
   --cfg experiments/crowdpose/hrnet/rsgnet_w32_256x192_adam_lr1e-3.yaml \
   TEST.MODEL_FILE cp_rsgnet_w32_256.pth
 ```
-* Testing on COCO-val dataset using [model zoo's models]()
+* Testing on COCO-val dataset using [model zoo's models](https://github.com/vikki-dai/RSGNet/blob/main/model_zoo.txt)
 ```python
   CUDA_VISIBLE_DEVICES=0,1,2,3 python tools/rsgnet_train.py \
   --cfg experiments/coco/hrnet/rsgnet_w32_256x192_adam_lr1e-3.yaml \
