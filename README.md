@@ -63,21 +63,23 @@ The code is developed based on the [HRNet project](https://github.com/leoxiaobin
 # Training and Testing
 * Testing on CrowdPose dataset using [model zoo's models]()
 ```python
-  Install CrowdPoseAPI exactly the same as COCOAPI.
-  Reverse the bug stated in https://github.com/Jeff-sjtu/CrowdPose/commit/785e70d269a554b2ba29daf137354103221f479e**
+  CUDA_VISIBLE_DEVICES=0,1,2,3 python tools/cp_train.py \
+  --cfg experiments/crowdpose/hrnet/rsgnet_w32_256x192_adam_lr1e-3.yaml \
 ```
 * Training on CrowdPose dataset
 ```python
-  Install CrowdPoseAPI exactly the same as COCOAPI.
-  Reverse the bug stated in https://github.com/Jeff-sjtu/CrowdPose/commit/785e70d269a554b2ba29daf137354103221f479e**
+  CUDA_VISIBLE_DEVICES=0,1,2,3 python tools/cp_test.py \
+  --cfg experiments/crowdpose/hrnet/rsgnet_w32_256x192_adam_lr1e-3.yaml \
+  TEST.MODEL_FILE cp_rsgnet_w32_256.pth
 ```
 * Testing on COCO-val dataset using [model zoo's models]()
 ```python
-  Install CrowdPoseAPI exactly the same as COCOAPI.
-  Reverse the bug stated in https://github.com/Jeff-sjtu/CrowdPose/commit/785e70d269a554b2ba29daf137354103221f479e**
+  CUDA_VISIBLE_DEVICES=0,1,2,3 python tools/rsgnet_train.py \
+  --cfg experiments/coco/hrnet/rsgnet_w32_256x192_adam_lr1e-3.yaml \
 ```
 * Training on COCO-val dataset
 ```python
-  Install CrowdPoseAPI exactly the same as COCOAPI.
-  Reverse the bug stated in https://github.com/Jeff-sjtu/CrowdPose/commit/785e70d269a554b2ba29daf137354103221f479e**
+  CUDA_VISIBLE_DEVICES=0,1,2,3 python tools/rsgnet_test.py \
+  --cfg experiments/cocoe/hrnet/rsgnet_w32_256x192_adam_lr1e-3.yaml \
+  TEST.MODEL_FILE coco_rsgnet_w32_256.pth
 ```
