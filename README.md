@@ -9,3 +9,55 @@ This is an official pytorch implementation of " RSGNet: Relation based Skeleton 
 * Flip test is used.
 * Person detector has person AP of 71.0 on CrowdPose test dataset.
 * GFLOPs is for convolution and linear layers only.
+## Results on CrowdPose test set
+![](https://github.com/vikki-dai/RSGNet/blob/main/visualization/main_results_COCOval.png)
+## Note:
+* Flip test is used.
+* Person detector has person AP of 56.4 on COCO val2017 dataset.
+* GFLOPs is for convolution and linear layers only.
+## Results on CrowdPose test set
+![](https://github.com/vikki-dai/RSGNet/blob/main/visualization/main_results_COCO_testdev.png)
+## Note:
+* Flip test is used.
+* Person detector has person AP of 60.9 on COCO test-dev2017 dataset.
+* GFLOPs is for convolution and linear layers only.
+# Environment
+The code is developed based on the [HRNet project](https://github.com/leoxiaobin/deep-high-resolution-net.pytorch). NVIDIA GPUs are needed. The code is developed and tested using 4 NVIDIA RTX GPU cards. Other platforms or GPU cards are not fully tested.
+# Installation
+1. Install pytorch >= v1.0.0 following official instruction. Note that if you use pytorch's version < v1.0.0, you should following the instruction at https://github.com/Microsoft/human-pose-estimation.pytorch to disable cudnn's implementations of BatchNorm layer. We encourage you to use higher pytorch's version(>=v1.0.0)
+2. Clone this repo, and we'll call the directory that you cloned as ${POSE_ROOT}.
+3. Install requirments：
+```python
+  pip install -r requirements.txt
+```
+4. Make libs:
+```python
+  cd ${POSE_ROOT}/lib
+  make
+```
+5. Install [COCOAPI](https://github.com/cocodataset/cocoapi):
+```python
+  # COCOAPI=/path/to/clone/cocoapi
+  git clone https://github.com/cocodataset/cocoapi.git $COCOAPI
+  cd $COCOAPI/PythonAPI
+  # Install into global site-packages
+  make install
+  # Alternatively, if you do not have permissions or prefer
+  # not to install the COCO API into global site-packages
+  python3 setup.py install --user 
+```
+6. Install [CrowdPoseAPI](https://github.com/Jeff-sjtu/CrowdPose)
+```python
+  Install CrowdPoseAPI exactly the same as COCOAPI.
+  Reverse the bug stated in https://github.com/Jeff-sjtu/CrowdPose/commit/785e70d269a554b2ba29daf137354103221f479e**
+```
+7. Init output and log directory:
+```python
+  mkdir output 
+  mkdir log
+```
+# Data Preparation
+* For **COCO data**, please download from [COCO download](https://cocodataset.org/#download), 2017 Train/Val is needed for COCO keypoints training and validation. We also provide person detection result of COCO val2017 and test-dev2017 to reproduce our multi-person pose estimation results. Please download and extract them under {POSE_ROOT}/data.  
+
+* For **CrowdPose data**, please download from [CrowdPose download](https://github.com/Jeff-sjtu/CrowdPose#dataset), Train/Val is needed for CrowdPose keypoints training and validation. Please download and extract them under {POSE_ROOT}/data.
+
