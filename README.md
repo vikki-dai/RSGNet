@@ -60,4 +60,24 @@ The code is developed based on the [HRNet project](https://github.com/leoxiaobin
 * For **COCO data**, please download from [COCO download](https://cocodataset.org/#download), 2017 Train/Val is needed for COCO keypoints training and validation. We also provide person detection result of COCO val2017 and test-dev2017 to reproduce our multi-person pose estimation results. Please download and extract them under {POSE_ROOT}/data.  
 
 * For **CrowdPose data**, please download from [CrowdPose download](https://github.com/Jeff-sjtu/CrowdPose#dataset), Train/Val is needed for CrowdPose keypoints training and validation. Please download and extract them under {POSE_ROOT}/data.
-
+# Training and Testing
+* Testing on CrowdPose dataset using [model zoo's models]()
+```python
+  Install CrowdPoseAPI exactly the same as COCOAPI.
+  Reverse the bug stated in https://github.com/Jeff-sjtu/CrowdPose/commit/785e70d269a554b2ba29daf137354103221f479e**
+```
+* Training on CrowdPose dataset
+```python
+  Install CrowdPoseAPI exactly the same as COCOAPI.
+  Reverse the bug stated in https://github.com/Jeff-sjtu/CrowdPose/commit/785e70d269a554b2ba29daf137354103221f479e**
+```
+* Testing on COCO-val dataset using [model zoo's models]()
+```python
+  Install CrowdPoseAPI exactly the same as COCOAPI.
+  Reverse the bug stated in https://github.com/Jeff-sjtu/CrowdPose/commit/785e70d269a554b2ba29daf137354103221f479e**
+```
+* Training on COCO-val dataset
+```python
+  Install CrowdPoseAPI exactly the same as COCOAPI.
+  Reverse the bug stated in https://github.com/Jeff-sjtu/CrowdPose/commit/785e70d269a554b2ba29daf137354103221f479e**
+```
