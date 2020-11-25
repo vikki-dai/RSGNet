@@ -25,8 +25,7 @@ import _init_paths
 from config import cfg
 from config import update_config
 from core.loss import JointsMSELoss
-from core.function import trpnet_validate as validate
-# from core.function import rsgnet_validate as validate
+from core.function import rsgnet_validate as validate
 from utils.utils import create_logger
 
 import dataset
